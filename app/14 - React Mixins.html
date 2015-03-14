@@ -1,0 +1,62 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset='UTF-8'>
+<script src='scripts/react_prod.js'></script>
+<script src='scripts/JSXTransformer.js'></script>
+<script src="scripts/jquery.js"></script>
+<script src="scripts/bootstrap.js"></script>
+<link href='styles/bootstrap.css' rel="stylesheet"/>
+<title>React JS</title>
+</head>
+<body>
+    <div id='app'></div>
+    <script type='text/jsx'>
+    	/** @jsx React.DOM */ 
+		
+		var ReactMixin = {
+				componentWillMount: function()
+				{
+					console.log("Component has mounterd");
+				},
+				getInitialState: function()
+				{
+					return {count:0}
+				},
+				incrementCount: function()
+				{
+					var newVal = this.state.count + 1;
+					console.log(newVal);
+				}
+			};
+		
+		var App = React.createClass({
+				render: function(){
+					return(
+						<div>
+							<ButtonComponent txt="This is ButtonComp" />
+							<InputComponent txt="This is InputText" />
+						</div>
+					)
+				}
+			});
+		
+		var ButtonComponent = React.createClass({
+				mixins: [ReactMixin],
+				render: function(){
+						return (<button>{this.props.txt}</button>)
+					}
+			});
+		
+		var InputComponent = React.createClass({
+				mixins: [ReactMixin],
+				render: function()
+				{
+					return (<input value={this.props.txt} />)
+				}
+			});
+			
+		React.render(<App/>, document.getElementById('app'));
+    </script>
+</body>
+</html>

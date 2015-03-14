@@ -1,0 +1,45 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset='UTF-8'>
+<script src='scripts/react_prod.js'></script>
+<script src='scripts/JSXTransformer.js'></script>
+<title>React JS</title>
+</head>
+<body>
+    <div id='reactProperties'></div>
+    <script type='text/jsx'>
+    	/** @jsx React.DOM */ 
+		var ReactProperties = React.createClass({
+				getDefaultProps: function()
+				{
+					return {
+							contentType: 'CONTENT_TYPE',
+							contentCategory: 0,
+							isItemDownloaded: false
+						}
+				},
+				propTypes: {
+					contentType: React.PropTypes.string,
+					contentCategory: React.PropTypes.number.isRequired,
+					isItemDownloaded: React.PropTypes.bool	
+				},
+				changeProperty: function(){
+					this.props.contentType = "CHANGED CONTENT";
+					this.setState();
+				},
+				render: function()
+				{
+					return(
+						<div onClick={this.changeProperty}>
+							<h3>The Content Type: {this.props.contentType}</h3>
+							<h5>The Content Category: {this.props.contentCategory}</h5>
+						</div>
+					)
+				}
+			});
+		
+		React.render(<ReactProperties contentCategory={1} isItemDownloaded={true}/>, document.getElementById('reactProperties'));
+    </script>
+</body>
+</html>

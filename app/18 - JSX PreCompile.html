@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>JSX Browser Compiler</title>
+  <link rel="stylesheet" href="styles/bootstrap.css">
+  <script src="scripts/react_prod.js"></script>
+  <script src="scripts/JSXTransformer.js"></script>
+  <script src="scripts/Transformer.js"></script>
+  <style>
+  pre,textarea{height: 1000px !important;}
+  </style>
+</head>
+<body>
+<div id="app"></div>
+<script type="text/jsx">
+  /** @jsx React.DOM */
+  React.renderComponent(
+    <Transformer />,
+    document.getElementById('app'))
+</script>
+</body>
+</html>

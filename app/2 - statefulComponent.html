@@ -1,0 +1,38 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset='UTF-8'>
+<script src='scripts/react_prod.js'></script>
+<script src='scripts/JSXTransformer.js'></script>
+<title>React JS</title>
+</head>
+<body>
+    <div id='statefulComponent'></div>
+    <script type='text/jsx'>
+    	/** @jsx React.DOM */ 
+		var Timer = React.createClass({
+				getInitialState: function(){
+					return {secondsElapsed: 0};
+				},
+				increaseSeconds: function()
+				{
+					this.setState({secondsElapsed: this.state.secondsElapsed + 1});
+				},
+				componentDidMount: function()
+				{
+					this.interval = setInterval(this.increaseSeconds, 1000);
+				},
+				componentDidUnmount: function()
+				{
+					clearInterval(this.interval);
+				},
+				render: function(){
+						return <div>Seconds Elapsed: <strong>{this.state.secondsElapsed}</strong></div>;
+					}
+			});
+		
+	  	React.render(<Timer />, document.getElementById('statefulComponent'));
+	  
+    </script>
+</body>
+</html>

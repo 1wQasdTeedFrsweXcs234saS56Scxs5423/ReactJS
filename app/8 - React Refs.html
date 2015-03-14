@@ -1,0 +1,55 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset='UTF-8'>
+<script src='scripts/react_prod.js'></script>
+<script src='scripts/JSXTransformer.js'></script>
+<title>React JS</title>
+</head>
+<body>
+    <div id='app'></div>
+    <script type='text/jsx'>
+    	/** @jsx React.DOM */ 
+		var Slider = React.createClass({
+			render: function(){
+					return(
+						<div>
+							<input ref="slider" type="range" min="0" max="255"onChange={this.props.updateValue}/>
+						</div>
+					)	
+				}
+		});
+		
+		
+		var App = React.createClass({
+				getInitialState: function()
+				{
+					return {red:0,green:0,blue:0};
+				},
+				update: function()
+				{
+					this.setState({
+							red: this.refs.red.refs.slider.getDOMNode().value,
+							green: this.refs.green.refs.slider.getDOMNode().value,
+							blue: this.refs.blue.refs.slider.getDOMNode().value
+						});
+				},
+				render: function()
+				{
+					return(
+						<div>
+							<Slider ref="red" updateValue={this.update}/>
+								<label>{this.state.red}</label>
+							<Slider ref="green" updateValue={this.update}/>
+								<label>{this.state.green}</label>
+							<Slider ref="blue" updateValue={this.update}/>
+								<label>{this.state.blue}</label>
+						</div>
+					)
+				}
+			});
+		
+		React.render(<App />, document.getElementById('app'));
+    </script>
+</body>
+</html>

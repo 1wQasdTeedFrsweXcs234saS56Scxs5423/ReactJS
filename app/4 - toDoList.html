@@ -1,0 +1,56 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset='UTF-8'>
+<script src='scripts/react_prod.js'></script>
+<script src='scripts/JSXTransformer.js'></script>
+<title>React JS</title>
+</head>
+<body>
+    <div id='toDoListApp'></div>
+    <script type='text/jsx'>
+    	/** @jsx React.DOM */ 
+		var TodoList = React.createClass({
+				render: function(){	
+						var createItem = function(itemText, index, itemsArray) {
+						  console.log("** " + itemsArray.length);
+					      return <li>{itemText}</li>;
+    					};
+					    return <ul>{this.props.items.map(createItem)}</ul>;
+					}
+			});
+		
+		var TodoApp = React.createClass({
+				getInitialState: function(){
+					return {items:[], text: ''}
+				},
+				onChange: function(e)
+				{
+					this.setState({text: e.target.value});
+				},
+				handleSubmit: function(e)
+				{
+					e.preventDefault();
+					this.state.items.push(this.state.text);
+					var nextItems = this.state.items;
+					var nextText = '';
+					this.setState({items: nextItems, text: nextText});
+				},
+				render:function(){
+					return (
+						<div>
+							<h3>ToDo List</h3>
+							<TodoList items={this.state.items}/>
+							<form onSubmit={this.handleSubmit}>
+								<input type="text" onChange={this.onChange} value={this.state.text}/>
+								<button>Add {this.props.riaCap} #{this.state.items.length+1}</button>
+							</form>	
+						</div>
+					)
+				}
+			});
+		
+		React.render(<TodoApp />, document.getElementById('toDoListApp'));
+    </script>
+</body>
+</html>

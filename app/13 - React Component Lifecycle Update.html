@@ -1,0 +1,58 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset='UTF-8'>
+<script src='scripts/react_prod.js'></script>
+<script src='scripts/JSXTransformer.js'></script>
+<script src="scripts/jquery.js"></script>
+<script src="scripts/bootstrap.js"></script>
+<link href='styles/bootstrap.css' rel="stylesheet"/>
+<title>React JS</title>
+</head>
+<body>
+    <div id='app'></div>
+    <script type='text/jsx'>
+    	/** @jsx React.DOM */ 
+		var App = React.createClass({
+				getInitialState: function()
+				{
+					return({increasing: false})
+				},
+				componentWillReceiveProps: function(nextProps)
+				{
+					//console.log("This is the next property component will receive " + JSON.stringify(nextProps));
+					console.log("Order 1 componentWillReceiveProps");
+					this.setState({increasing:nextProps.val > this.props.val});
+				},
+				shouldComponentUpdate: function(nextProps, nextState)
+				{
+					// console.log(JSON.stringify(nextProps) + " ----- " + JSON.stringify(nextState));
+					console.log("Order 2 shouldComponentUpdate");
+					return(nextProps.val % 5 === 0)
+				},
+				update: function()
+				{
+					var newVal = this.props.val + 1;
+					this.setProps({val: newVal});
+				},
+				render: function()
+				{
+					//console.log("RENDER function will be called only after **componentWillReceiveProps**");
+					// console.log(this.state.increasing);
+					console.log("Order 3 render");
+					return(
+						<button style={this.btnStyle} onClick={this.update}>{this.props.val}</button>
+					)
+				},
+				componentDidUpdate: function(prevProps, nextProps)
+				{
+					console.log("Order 4 componentDidUpdate");
+				}
+				
+			});
+		
+		React.render(<App val={0}/>, document.getElementById('app'));
+		
+    </script>
+</body>
+</html>

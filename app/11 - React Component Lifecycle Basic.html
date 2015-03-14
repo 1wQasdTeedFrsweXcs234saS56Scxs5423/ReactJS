@@ -1,0 +1,56 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset='UTF-8'>
+<script src='scripts/react_prod.js'></script>
+<script src='scripts/JSXTransformer.js'></script>
+<script src="scripts/jquery.js"></script>
+<script src="scripts/bootstrap.js"></script>
+<link href='styles/bootstrap.css' rel="stylesheet"/>
+<title>React JS</title>
+</head>
+<body>
+    <div id='app'></div>
+    <button onClick="render()">Render</button>
+    <button onClick="unmount()">Unmount</button>
+    <script type='text/jsx'>
+    	/** @jsx React.DOM */ 
+		var App = React.createClass({
+				update: function()
+				{
+					var newVal = this.props.val + 1;
+					this.setProps({val: newVal});
+				},
+				componentWillMount: function()
+				{
+					console.log("1 componentWillMount: This component will mount in page before render.");
+				},
+				render: function()
+				{
+					console.log("2 render: I'll render Content");
+					return(
+						<button onClick={this.update}>{this.props.val}</button>
+					)
+				},
+				componentDidMount: function()
+				{
+					console.log("3 componentDidMount: This function will be called in page after render.");
+				},
+				componentWillUnmount: function()
+				{
+					console.log("4 componentWillUnmount: Component Will Unmount");
+				}
+			});
+		
+		/*React.render(<App val={0}/>, document.getElementById('app'));*/
+		
+		window.render = function(){
+				React.renderComponent(<App val={0}/>, document.getElementById('app'));
+			};
+			
+		window.unmount = function(){
+				React.unmountComponentAtNode(document.getElementById('app'));
+			};
+    </script>
+</body>
+</html>

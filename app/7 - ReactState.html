@@ -1,0 +1,52 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset='UTF-8'>
+<script src='scripts/react_prod.js'></script>
+<script src='scripts/JSXTransformer.js'></script>
+<title>React JS</title>
+</head>
+<body>
+    <div id='reactState'></div>
+    <script type='text/jsx'>
+    	/** @jsx React.DOM */ 
+		var ReactState = React.createClass({
+				getInitialState: function()
+				{
+					return {contentType: 'SET STATE Audio'}
+				},
+				getDefaultProps: function()
+				{
+					return {
+							contentType: 'CONTENT_TYPE',
+							contentCategory: 0,
+							isItemDownloaded: false
+						}
+				},
+				propTypes: {
+					contentType: React.PropTypes.string,
+					contentCategory: React.PropTypes.number.isRequired,
+					isItemDownloaded: React.PropTypes.bool	
+				},
+				onChange: function(e)
+				{
+					this.setState({contentType: e.target.value});
+				},
+				render: function()
+				{
+					return(
+						<div>
+							<h3>The Content Type: {this.state.contentType}</h3>
+							<h5>The Content Category: {this.props.contentCategory}</h5>
+							
+							<h3>Another Example</h3>
+							<input type="text" onChange={this.onChange}/>
+						</div>
+					)
+				}
+			});
+		
+		React.render(<ReactState contentType="Audio" contentCategory={1} isItemDownloaded={true}/>, document.getElementById('reactState'));
+    </script>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset='UTF-8'>
+<script src='scripts/react_prod.js'></script>
+<script src='scripts/JSXTransformer.js'></script>
+<script src="scripts/bootstrap.js"></script>
+<link href='styles/bootstrap.css' rel="stylesheet"/>
+<title>React JS</title>
+</head>
+<body>
+    <div id='app'></div>
+    <script type='text/jsx'>
+    	/** @jsx React.DOM */ 
+		var App = React.createClass({
+				render: function()
+				{
+					return(
+						<div>
+						<BButton className="btn-danger">I <BLike className="glyphicon-envelope"/> React</BButton>
+						<BButton className="btn-success">I <BLike className="glyphicon-pencil"/> React</BButton>
+						<BButton className="btn-primary">I <BLike className="glyphicon-eur"/> React</BButton>
+						</div>
+					)
+				}
+			});
+		
+		var BButton = React.createClass({
+				render: function(){
+						return(
+							this.transferPropsTo(<a className="btn">{this.props.children}</a>)
+						)
+					}
+			});
+			
+		var BLike = React.createClass({
+				render: function(){
+						return(
+							this.transferPropsTo(<span className="glyphicon"></span>)
+						)
+					}
+			});
+			
+		var BUnlike = React.createClass({
+				render: function(){
+						return(
+							<span>Unlike</span>
+						)
+					}
+			});
+		
+		React.render(<App />, document.getElementById('app'));
+    </script>
+</body>
+</html>

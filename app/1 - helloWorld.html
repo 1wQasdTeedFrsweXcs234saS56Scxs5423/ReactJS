@@ -1,0 +1,23 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset='UTF-8'>
+<script src='scripts/react_prod.js'></script>
+<script src='scripts/JSXTransformer.js'></script>
+<title>React JS</title>
+</head>
+<body>
+    <div id='example'></div>
+    <script type='text/jsx'>
+    	/** @jsx React.DOM */ 
+	  var HelloWorld = React.createClass({
+		  	render: function()
+			{
+				return <h1>Hiii, {this.props.name}</h1>
+			}
+		  });
+		  
+		React.renderComponent(<HelloWorld name="Ankit Tanna"/>, document.getElementById('example'));
+    </script>
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset='UTF-8'>
+<script src='scripts/react_prod.js'></script>
+<script src='scripts/JSXTransformer.js'></script>
+<script src="scripts/jquery.js"></script>
+<script src="scripts/bootstrap.js"></script>
+<link href='styles/bootstrap.css' rel="stylesheet"/>
+<title>React JS</title>
+</head>
+<body>
+    <div id='app'></div>
+    <script type='text/jsx'>
+    	/** @jsx React.DOM */ 
+	var APP = React.createClass({
+			getInitialState: function(){
+				return {
+						red:0
+					}	
+			},
+			update: function()
+			{
+				this.setState({red: this.refs.red.refs.range.getDOMNode().value});
+			},
+			render: function()
+			{
+				return(
+					<div>
+						<NumberInput ref="red" update={this.update} min={0} max={255} step={1} val={+this.state.red} label="Red"/>
+					</div>
+				)
+			}
+		});
+	
+	var NumberInput = React.createClass({
+			propTypes: {
+				min: React.PropTypes.number,
+				max: React.PropTypes.number,
+				step: React.PropTypes.number,
+				val: React.PropTypes.number,
+				label: React.PropTypes.string,	
+				update: React.PropTypes.func.isRequired,
+				type: React.PropTypes.oneOf(['number', 'range'])
+			},
+			getDefaultProps: function()
+			{
+				return{
+						min: 0,
+						max: 255,
+						step: 1,
+						val: 0,
+						label: '',
+						type: 'range'
+					}
+			},
+			render: function()
+			{
+				return(
+					<div>
+						<input ref="range" type={this.props.type} min={this.props.min} max={this.props.max} step={this.props.step} onChange={this.props.update} defaultValue={this.props.val}/>
+						<label>{this.props.val}</label>
+					</div>
+				)
+			}
+		});
+	
+    React.renderComponent(
+        <APP />,
+        document.getElementById('app'));
+    </script>
+</body>
+</html>

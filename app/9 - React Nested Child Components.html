@@ -1,0 +1,51 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset='UTF-8'>
+<script src='scripts/react_prod.js'></script>
+<script src='scripts/JSXTransformer.js'></script>
+<script src="scripts/bootstrap.js"></script>
+<link href='styles/bootstrap.css' rel="stylesheet"/>
+<title>React JS</title>
+</head>
+<body>
+    <div id='app'></div>
+    <script type='text/jsx'>
+    	/** @jsx React.DOM */ 
+		var App = React.createClass({
+				render: function()
+				{
+					return(
+						<BButton>I <BLike/> React</BButton>
+					)
+				}
+			});
+		
+		var BButton = React.createClass({
+				render: function(){
+						return(
+							<a className="btn btn-primary">{this.props.children}</a>
+						)
+					}
+			});
+			
+		var BLike = React.createClass({
+				render: function(){
+						return(
+							<span>Like</span>
+						)
+					}
+			});
+			
+		var BUnlike = React.createClass({
+				render: function(){
+						return(
+							<span>Unlike</span>
+						)
+					}
+			});
+		
+		React.render(<App />, document.getElementById('app'));
+    </script>
+</body>
+</html>
